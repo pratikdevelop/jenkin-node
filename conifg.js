@@ -1,29 +1,16 @@
-
 // const mongoose = require("mongoose");
-const {MongoClient} = require('mongodb');
+const { MongoClient } = require("mongodb");
+const NEW_MONGO_URL = process.env.MONGO_URL;
+console.log(NEW_MONGO_URL);
+const connectMongo = async () => {
+  try {
+    const client = new MongoClient(NEW_MONGO_URL);
+    return client;
+  } catch (e) {
+    return e;
+  }
+};
 
-const MONGO_URL = "mongodb+srv://adminchatapp:fOdPrVZWwdCpqTLi@cluster0.nt431ty.mongodb.net/chat-app?retryWrites=true&w=majority";
- const  connectMongo = async()=>{
-    // mongoose.connect(MONGO_URL,  {
-    //     useNewUrlParser: true,
-    //     useUnifiedTopology: true
-    // }).then(()=>{
-    //     console.log("connection successful");
-    // }).catch((err)=>{
-    //     console.log(err);
-    // })
-    try {
-        const client = new MongoClient(MONGO_URL);
+const database = connectMongo();
 
-        await client.connect();
-            // console.log('res', response);
-       return client;
-     
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-const connectClient =  connectMongo()
-
-exports.connectClient = connectClient;
+exports.database = database;

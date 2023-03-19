@@ -1,14 +1,17 @@
 const  express  = require( 'express')
 const app = express();
 const port = process.env.PORT || 3000;
-const  {connectClient}  =  require('./conifg')
+const path = require('path')
+require("dotenv").config({ path: path.join(__dirname, "./.env") });
+
+const  {database}  =  require('./conifg')
 app.get('/',(req,res)=>{
-   connectClient.then(async data=>{
-    databasesList = await data.db('sample_mflix').collection('sample_mflix')
-    const movies = await databasesList.find()
-    console.log(movies);
+    let data = []
+    database.then((response )=>{
+        data.push(response)
     })
-    res.send('hello world')
+    console.log(data)
+    res.json(data)
 })
 app.listen(port, ()=>{
     console.log(`port listening on http://localhost:${port}`);
