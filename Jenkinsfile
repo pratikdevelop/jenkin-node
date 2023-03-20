@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'test'
                 nodejs('Node-19.18') {
-                    sh 'npm install'
+                    sh 'npm install --force'
                     sh 'npm --version'
                 }
             }
