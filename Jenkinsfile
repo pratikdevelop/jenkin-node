@@ -4,6 +4,10 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'test'
+                nodejs('Node-19.18') {
+                    sh 'npm install'
+                    sh 'npm --version'
+                }
             }
         }
         stage('Test') { 
