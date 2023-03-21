@@ -16,21 +16,24 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-
+console.log('process.env.PORT', process.env.PORT);
 app.use(cors());
 app.use(express.json());
 app.use(
     "/api",
-    createProxyMiddleware({ target: "http://127.0.0.1:5173/", changeOrigin: true })
+    createProxyMiddleware({ target: "https://movie-app-ia2z.onrender.com/", changeOrigin: true })
 );
 express.urlencoded({ extended: false });
 
 app.get('/', (req, res) => {
+  
     res.sendFile(path.join(__dirname + '/index.html'))
 })
 
 app.get('/movies', async (req, res) => {
     try {
+      
+      
         const movies_response = await movies.find().limit(20);
         const data = await movies_response.toArray()
         const moviesInfo = data.filter(async(movie)=>{
@@ -52,5 +55,5 @@ app.get('/movies', async (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`port listening on http://localhost:${port}`);
+    console.log(`port listening on https://movie-app-ia2z.onrender.com/`);
 })
