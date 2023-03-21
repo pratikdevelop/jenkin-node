@@ -4,10 +4,10 @@ pipeline {
         stage('Build') { 
             steps {
                 echo 'test'
-                nodejs('Node-19.18') {
-                    sh 'npm install --force'
-                    sh 'npm --version'
-                }
+//                 nodejs('Node-19.18') {
+//                     sh 'npm install --force'
+//                     sh 'npm --version'
+//                 }
             }
         }
         stage('Test') { 
