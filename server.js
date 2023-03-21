@@ -6,11 +6,11 @@ const path = require('path')
 require("dotenv").config({ path: path.join(__dirname, "./.env") });
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const cors = require("cors");
+console.log('api', process.env.MONGO_URL);
 const NEW_MONGO_URL = process.env.MONGO_URL;
 const client = new MongoClient(NEW_MONGO_URL);
 const movies = client.db('sample_mflix').collection('movies');
 const { Configuration, OpenAIApi } = require("openai");
-console.log('api', process.env.OPENAI_API_KEY);
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
