@@ -6,7 +6,6 @@ const path = require('path')
 require("dotenv").config({ path: path.join(__dirname, "./.env") });
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const cors = require("cors");
-console.log('api', process.env.MONGO_URL);
 const NEW_MONGO_URL = process.env.MONGO_URL;
 const client = new MongoClient(NEW_MONGO_URL);
 const movies = client.db('sample_mflix').collection('movies');
@@ -37,13 +36,6 @@ app.get('/movies', async (req, res) => {
         const movies_response = await movies.find().limit(20);
         const data = await movies_response.toArray()
         const moviesInfo = data.filter(async(movie)=>{
-            // const response = await openai.createImage({
-            //     prompt:movie.title,
-            //     n: 1,
-            //     size: "1024x1024",
-            //   });
-            //   movie.image_url = response.data.data[0].url;
-            //   console.log('movies', movies);
               return movie
             })
             return res.status(200).json(moviesInfo)
