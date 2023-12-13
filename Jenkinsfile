@@ -1,11 +1,11 @@
-node {
-    stage('Build') { 
+pipeline {
+    agent {
+        docker { image 'node:20.10.0-alpine3.19' }
+    }
+    stage('check') { 
         steps {
-            echo 'test'
-            nodejs('Node-19.18') {
-                sh 'npm install --force'
-                sh 'npm --version'
-            }
+            sh 'node --version'
+            sh 'npm --version'
         }
     }
     stage('Test') { 
